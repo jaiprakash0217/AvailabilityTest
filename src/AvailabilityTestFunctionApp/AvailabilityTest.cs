@@ -61,7 +61,7 @@ namespace KPIReporting.AvailabilityTest
         {
             _telemetryClient.TrackAvailability(new AvailabilityTelemetry()
             {
-                Name = nameof(AvailabilityTestDemo),
+                Name = nameof(AvailabilityTest),
                 Success = isSuccess
             });
         }
