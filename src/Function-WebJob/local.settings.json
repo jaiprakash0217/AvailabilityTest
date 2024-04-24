@@ -1,7 +1,0 @@
-{
-  "IsEncrypted": false,
-  "Values": {
-    "AzureWebJobsStorage": "changemestorage",
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet"
-  }
-}
