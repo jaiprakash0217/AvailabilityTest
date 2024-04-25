@@ -31,12 +31,12 @@ namespace KPIReporting.AvailabilityTest
             _telemetryClient = telemetryClient;
             _httpClient = httpClientFactory.CreateClient();
             _testAppUrl = configuration["TestAppUrl"];
-            _testAppUrl = configuration["TestJob1Url"];
-            _testAppUrl = configuration["TestJob2Url"];
-            _testAppUrl = configuration["TestJob3Url"];
-            _testAppUrl = configuration["TestJob4Url"];
-            _testAppUrl = configuration["TestJob5Url"];
-            _testAppUrl = configuration["TestJob6Url"];
+            _testJob1Url = configuration["TestJob1Url"];
+            _testJob2Url = configuration["TestJob2Url"];
+            _testJob3Url = configuration["TestJob3Url"];
+            _testJob4Url = configuration["TestJob4Url"];
+            _testJob5Url = configuration["TestJob5Url"];
+            _testJob6Url = configuration["TestJob6Url"];
         }
 
         [FunctionName("KPIReporting-AvailabilityTest")]
