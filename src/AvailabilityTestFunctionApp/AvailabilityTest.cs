@@ -40,7 +40,7 @@ namespace KPIReporting.AvailabilityTest
         }
 
         [FunctionName("KPIReporting-AvailabilityTest")]
-        public async Task Run([TimerTrigger("0 */59 * * * *")] TimerInfo myTimer, ILogger log)
+        public async Task Run([TimerTrigger("0 */1 * * * *")] TimerInfo myTimer, ILogger log)
         {
             
             log.LogInformation($"Availability test executed at: {DateTime.Now}");
@@ -50,7 +50,7 @@ namespace KPIReporting.AvailabilityTest
                 // Make a request to the test app that we monitor for availability
                  _httpClient.BaseAddress = new Uri("https://usawu2gdpcntrl-dev-wap.scm.usawu2gdpcntrl-dev-ase.appserviceenvironment.net");
                 //_httpClient.DefaultRequestHeaders.Add($"Authorization", $"Basic dXNhd3UyZ2RwY250cmwtZGV2LXdhcDowRE00YVN2d1dXTTltSjI4R01xR3JjRlF0YUtQQjdiMTM1WnE0dmc0cEpGR2pUNjFudEdmRFQyNVRYU1g=");
-                _httpClient.DefaultRequestHeaders.Add($"Authorization", $"Basic ZmIzNjIwOTMtNjk5NC00NzVlLTk3NTYtYjcyYTgxNGMyNDI0OjBETTRhU3Z3V1dNOW1KMjhHTXFHcmNGUXRhS1BCN2IxMzVacTR2ZzRwSkZHalQ2MW50R2ZEVDI1VFhTWA==");
+                _httpClient.DefaultRequestHeaders.Add($"Authorization", $"Basic JHVzYXd1MmdkcGNudHJsLWRldi13YXA6MERNNGFTdndXV005bUoyOEdNcUdyY0ZRdGFLUEI3YjEzNVpxNHZnNHBKRkdqVDYxbnRHZkRUMjVUWFNY");
                 using HttpResponseMessage response = await _httpClient.GetAsync("/api/continuouswebjobs/MetallurgyReportWebJob");
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response.EnsureSuccessStatusCode();
