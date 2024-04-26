@@ -48,11 +48,12 @@ namespace KPIReporting.AvailabilityTest
             try
             {
                 // Make a request to the test app that we monitor for availability
+                 _httpClient.BaseAddress = new Uri("https://usawu2gdpcntrl-dev-wap.usawu2gdpcntrl-dev-ase.appserviceenvironment.net");
                 using HttpResponseMessage response = await _httpClient.GetAsync(_testAppUrl);
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for {_testAppUrl}: {response.StatusCode} ");
-                _httpClient.BaseAddress = new Uri("https://usawu2gdpcntrl-dev-wap.usawu2gdpcntrl-dev-ase.appserviceenvironment.net");
+               
 
                 // Repeat this task for all web jobs
                 // Make a request to the test app that we monitor for availability
