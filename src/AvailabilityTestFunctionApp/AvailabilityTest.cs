@@ -42,14 +42,15 @@ namespace KPIReporting.AvailabilityTest
         [FunctionName("KPIReporting-AvailabilityTest")]
         public async Task Run([TimerTrigger("0 */1 * * * *")] TimerInfo myTimer, ILogger log)
         {
-
+            
             log.LogInformation($"Availability test executed at: {DateTime.Now}");
 
             try
             {
                 // Make a request to the test app that we monitor for availability
                  _httpClient.BaseAddress = new Uri("https://usawu2gdpcntrl-dev-wap.scm.usawu2gdpcntrl-dev-ase.appserviceenvironment.net");
-                using HttpResponseMessage response = await _httpClient.GetAsync("/");
+                _httpClient.DefaultRequestHeaders.Add($"Authorization", $"Basic {Base64Encode($"usawu2gdpcntrl-dev-wap:0DM4aSvwWWM9mJ28GMqGrcFQtaKPB7b135Zq4vg4pJFGjT61ntGfDT25TXSX")}");
+                using HttpResponseMessage response = await _httpClient.GetAsync("/api/continuouswebjobs/MetallurgyReportWebJob");
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for base URL: {response} ");
