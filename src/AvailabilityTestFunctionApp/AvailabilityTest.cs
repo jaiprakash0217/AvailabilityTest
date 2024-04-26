@@ -40,7 +40,7 @@ namespace KPIReporting.AvailabilityTest
         }
 
         [FunctionName("KPIReporting-AvailabilityTest")]
-        public async Task Run([TimerTrigger("0 */2 * * * *")] TimerInfo myTimer, ILogger log)
+        public async Task Run([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer, ILogger log)
         {
 
             log.LogInformation($"Availability test executed at: {DateTime.Now}");
