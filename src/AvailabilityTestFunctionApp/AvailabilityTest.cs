@@ -49,7 +49,7 @@ namespace KPIReporting.AvailabilityTest
             {
                 // Make a request to the test app that we monitor for availability
                  _httpClient.BaseAddress = new Uri("https://usawu2gdpcntrl-dev-wap.scm.usawu2gdpcntrl-dev-ase.appserviceenvironment.net");
-                _httpClient.DefaultRequestHeaders.Add($"Authorization", $"Basic {Base64Encode($"usawu2gdpcntrl-dev-wap:0DM4aSvwWWM9mJ28GMqGrcFQtaKPB7b135Zq4vg4pJFGjT61ntGfDT25TXSX")}");
+                _httpClient.DefaultRequestHeaders.Add($"Authorization", $"Basic {Base64Encode("usawu2gdpcntrl-dev-wap:0DM4aSvwWWM9mJ28GMqGrcFQtaKPB7b135Zq4vg4pJFGjT61ntGfDT25TXSX")}");
                 using HttpResponseMessage response = await _httpClient.GetAsync("/api/continuouswebjobs/MetallurgyReportWebJob");
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response.EnsureSuccessStatusCode();
