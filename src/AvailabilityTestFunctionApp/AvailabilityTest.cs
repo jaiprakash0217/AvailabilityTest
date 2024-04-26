@@ -52,7 +52,7 @@ namespace KPIReporting.AvailabilityTest
                 using HttpResponseMessage response = await _httpClient.GetAsync("/");
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response.EnsureSuccessStatusCode();
-                log.LogInformation($"Successful response! Response code for base URL: {response.StatusCode} ");
+                log.LogInformation($"Successful response! Response code for base URL: {response} ");
                
 
                 // Repeat this task for all web jobs
@@ -61,7 +61,7 @@ namespace KPIReporting.AvailabilityTest
                 
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response1.EnsureSuccessStatusCode();
-                log.LogInformation($"Successful response! Response code for MetallurgyReportWebJob1: {response1.StatusCode} ");
+                log.LogInformation($"Successful response! Response code for MetallurgyReportWebJob1: {response1} ");
                 
               /*  
                  // Make a request to the test app that we monitor for availability
