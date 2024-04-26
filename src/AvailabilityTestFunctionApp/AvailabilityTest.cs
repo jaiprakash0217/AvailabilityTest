@@ -57,7 +57,7 @@ namespace KPIReporting.AvailabilityTest
 
                 // Repeat this task for all web jobs
                 // Make a request to the test app that we monitor for availability
-                using HttpResponseMessage response1 = await _httpClient.GetAsync("/api/continuouswebjobs/MetallurgyReportWebJob");
+                using HttpResponseMessage response1 = await _httpClient.GetAsync("/api/continuouswebjobs/MetallurgyReportWebJob1");
                 
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response1.EnsureSuccessStatusCode();
