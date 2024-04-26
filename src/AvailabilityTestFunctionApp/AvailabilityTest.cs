@@ -48,10 +48,10 @@ namespace KPIReporting.AvailabilityTest
             try
             {
                 // Make a request to the test app that we monitor for availability
-                 _httpClient.BaseAddress = new Uri("https://usawu2gdpcntrl-dev-wap.scm.usawu2gdpcntrl-dev-ase.appserviceenvironment.net");
+                 //_httpClient.BaseAddress = new Uri("https://usawu2gdpcntrl-dev-wap.scm.usawu2gdpcntrl-dev-ase.appserviceenvironment.net");
                 //_httpClient.DefaultRequestHeaders.Add($"Authorization", $"Basic dXNhd3UyZ2RwY250cmwtZGV2LXdhcDowRE00YVN2d1dXTTltSjI4R01xR3JjRlF0YUtQQjdiMTM1WnE0dmc0cEpGR2pUNjFudEdmRFQyNVRYU1g=");
                 _httpClient.DefaultRequestHeaders.Add($"Authorization", $"Basic JHVzYXd1MmdkcGNudHJsLWRldi13YXA6MERNNGFTdndXV005bUoyOEdNcUdyY0ZRdGFLUEI3YjEzNVpxNHZnNHBKRkdqVDYxbnRHZkRUMjVUWFNY");
-                using HttpResponseMessage response = await _httpClient.GetAsync("/api/continuouswebjobs/MetallurgyReportWebJob");
+                using HttpResponseMessage response = await _httpClient.GetAsync("https://usawu2gdpcntrl-dev-wap.scm.usawu2gdpcntrl-dev-ase.appserviceenvironment.net/api/continuouswebjobs/MetallurgyReportWebJob");
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for base URL: {response} ");
@@ -59,7 +59,7 @@ namespace KPIReporting.AvailabilityTest
 
                 // Repeat this task for all web jobs
                 // Make a request to the test app that we monitor for availability
-                using HttpResponseMessage response1 = await _httpClient.GetAsync("/api/continuouswebjobs/MetallurgyReportWebJob1");
+                using HttpResponseMessage response1 = await _httpClient.GetAsync("https://usawu2gdpcntrl-dev-wap.scm.usawu2gdpcntrl-dev-ase.appserviceenvironment.net/api/continuouswebjobs/MetallurgyReportWebJob1");
                 
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response1.EnsureSuccessStatusCode();
