@@ -48,44 +48,44 @@ namespace KPIReporting.AvailabilityTest
             try
             {
                 // Make a request to the test app that we monitor for availability
-                using HttpResponseMessage response = await _httpClient.GetAsync(_testAppUrl);
+                using HttpResponseMessage response =  _httpClient.GetAsync(_testAppUrl);
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for {_testAppUrl}: {response.StatusCode} ");
 
                 // Repeat this task for all web jobs
                 // Make a request to the test app that we monitor for availability
-                using HttpResponseMessage response1 = await _httpClient.GetAsync(_testJob1Url);
+                using HttpResponseMessage response1 =  _httpClient.GetAsync(_testJob1Url);
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response1.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for {_testJob1Url}: {response1.StatusCode} ");
 
                  // Make a request to the test app that we monitor for availability
-                using HttpResponseMessage response2 = await _httpClient.GetAsync(_testJob2Url);                
+                using HttpResponseMessage response2 =  _httpClient.GetAsync(_testJob2Url);                
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response2.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for {_testJob2Url}: {response2.StatusCode} ");
 
                  // Make a request to the test app that we monitor for availability
-                using HttpResponseMessage response3 = await _httpClient.GetAsync(_testJob3Url);                
+                using HttpResponseMessage response3 =  _httpClient.GetAsync(_testJob3Url);                
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response3.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for {_testJob3Url}: {response3.StatusCode} ");
 
                  // Make a request to the test app that we monitor for availability
-                using HttpResponseMessage response4 = await _httpClient.GetAsync(_testJob4Url);                
+                using HttpResponseMessage response4 =  _httpClient.GetAsync(_testJob4Url);                
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response4.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for {_testJob4Url}: {response4.StatusCode} ");
 
                  // Make a request to the test app that we monitor for availability
-                using HttpResponseMessage response5 = await _httpClient.GetAsync(_testJob5Url);
+                using HttpResponseMessage response5 =  _httpClient.GetAsync(_testJob5Url);
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response5.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for {_testJob5Url}: {response5.StatusCode} ");
 
                  // Make a request to the test app that we monitor for availability
-                using HttpResponseMessage response6 = await _httpClient.GetAsync(_testJob6Url);                
+                using HttpResponseMessage response6 =  _httpClient.GetAsync(_testJob6Url);                
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response6.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for {_testJob6Url}: {response6.StatusCode} ");
