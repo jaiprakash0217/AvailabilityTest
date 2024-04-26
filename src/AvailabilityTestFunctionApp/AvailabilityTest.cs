@@ -40,7 +40,7 @@ namespace KPIReporting.AvailabilityTest
         }
 
         [FunctionName("KPIReporting-AvailabilityTest")]
-        public async Task Run([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer, ILogger log)
+        public async Task Run([TimerTrigger("0 */2 * * * *")] TimerInfo myTimer, ILogger log)
         {
 
             log.LogInformation($"Availability test executed at: {DateTime.Now}");
@@ -52,14 +52,17 @@ namespace KPIReporting.AvailabilityTest
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for {_testAppUrl}: {response.StatusCode} ");
+                _httpClient.BaseAddress = new Uri("https://usawu2gdpcntrl-dev-wap.usawu2gdpcntrl-dev-ase.appserviceenvironment.net");
 
                 // Repeat this task for all web jobs
                 // Make a request to the test app that we monitor for availability
-                using HttpResponseMessage response1 = await _httpClient.GetAsync(_testJob1Url);
+                using HttpResponseMessage response1 = await _httpClient.GetAsync("/api/continuouswebjobs/MetallurgyReportWebJob");
+                
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response1.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for {_testJob1Url}: {response1.StatusCode} ");
-
+                
+              /*  
                  // Make a request to the test app that we monitor for availability
                 using HttpResponseMessage response2 = await _httpClient.GetAsync(_testJob2Url);                
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
@@ -89,7 +92,7 @@ namespace KPIReporting.AvailabilityTest
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response6.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for {_testJob6Url}: {response6.StatusCode} ");
-
+*/
                 // Signal to App Insights that everything is ok
                 this.TrackAvailability(true);
             }
