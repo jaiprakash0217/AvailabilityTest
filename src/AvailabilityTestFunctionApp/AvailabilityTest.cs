@@ -48,7 +48,7 @@ namespace KPIReporting.AvailabilityTest
             try
             {
                 // Make a request to the test app that we monitor for availability
-                 _httpClient.BaseAddress = new Uri("https://usawu2gdpcntrl-dev-wap.usawu2gdpcntrl-dev-ase.appserviceenvironment.net");
+                 _httpClient.BaseAddress = new Uri("https://usawu2gdpcntrl-dev-wap.scm.usawu2gdpcntrl-dev-ase.appserviceenvironment.net");
                 using HttpResponseMessage response = await _httpClient.GetAsync("/");
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response.EnsureSuccessStatusCode();
