@@ -2,8 +2,6 @@ using System;
 using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Script.Serialization;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.Azure.WebJobs;
@@ -17,10 +15,6 @@ namespace KPIReporting.AvailabilityTest
     /// and reports result to Application Insights
     /// The function will run every 15 minutes
     /// </summary>
-    public class WebJobStatus
-    {
-        public string status{ get; set; }
-    }
     public class AvailabilityTest
     {
         private readonly TelemetryClient _telemetryClient;
@@ -64,32 +58,36 @@ namespace KPIReporting.AvailabilityTest
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
                 using HttpResponseMessage response = await _httpClient.GetAsync(_testAppUrl);
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
-                var JobStatus = await response.Content.ReadAsStringAsync();  
-                //var json1 = new JavaScriptSerializer().Serialize(JobStatus)
                 response.EnsureSuccessStatusCode();
-                log.LogInformation($"Successful response! Response code for Base URL: {response} : {((WebJobStatus)JobStatus).status} ");
+                log.LogInformation($"Successful response! Response code for Base URL: {response.StatusCode} ");
                
 
                 // Repeat this task for all web jobs
                 // Make a request to the test app that we monitor for availability
                 using HttpResponseMessage response1 = await _httpClient.GetAsync(_testJob1Url);
-                
-                // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 var Job1Status = await response1.Content.ReadAsStringAsync();  
-                log.LogInformation($"Successful response! Response code for _testJob1Url: {Job1Status.status} ");
-                //var json1 = new JavaScriptSerializer().Serialize(Job1Status)
-                if (!(((WebJobStatus)Job1Status).status == "Running" || ((WebJobStatus)Job1Status).status == "Completed"))
-                    throw new ArgumentException("Please start web job.");
+                log.LogInformation($"Successful response! Response code for _tetJob1Url: {Job1Status.status} ");
+                if (Job1Status.Contains("\"status\":\"Running\"") || Job1Status.Contains("\"status\":\"Completed\""))
+                {
+                log.LogInformation($"Successful response! Response status for {_testJob1Url}: Running");
+                }
+                else
+                {
+                    throw new ArgumentException("Please start web job: {_testJob1Url}");
+                }
                 
                  // Make a request to the test app that we monitor for availability
                 using HttpResponseMessage response2 = await _httpClient.GetAsync(_testJob2Url);                
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 var Job2Status = await response2.Content.ReadAsStringAsync();
-                response2.EnsureSuccessStatusCode();
-                log.LogInformation($"Successful response! Response code for {_testJob2Url}: {Job2Status.status}");
-                //var json2 = new JavaScriptSerializer().Serialize(Job2Status)
-                 if (!(((WebJobStatus)Job2Status).status == "Running" || ((WebJobStatus)Job2Status).status == "Completed"))
-                    throw new ArgumentException("Please start web job.");
+                if (Job2Status.Contains("\"status\":\"Running\"") || Job2Status.Contains("\"status\":\"Completed\""))
+                {
+                log.LogInformation($"Successful response! Response status for {_testJob2Url}: Running");
+                }
+                else
+                {
+                    throw new ArgumentException("Please start web job: {_testJob2Url}");
+                }
 /*
                  // Make a request to the test app that we monitor for availability
                 using HttpResponseMessage response3 = await _httpClient.GetAsync(_testJob3Url);                
