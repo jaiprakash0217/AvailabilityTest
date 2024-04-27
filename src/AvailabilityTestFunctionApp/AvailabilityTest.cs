@@ -69,7 +69,7 @@ namespace KPIReporting.AvailabilityTest
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 var Job1Status = await response1.Content.ReadAsStringAsync();  
                 log.LogInformation($"Successful response! Response code for _testJob1Url: {Job1Status.status} ");
-                if !(Job1Status.status == "Running" || Job1Status.status == "Completed")
+                if (!(Job1Status.status == "Running" || Job1Status.status == "Completed"))
                     throw new ArgumentException("Please start web job.");
                 
                  // Make a request to the test app that we monitor for availability
@@ -78,7 +78,7 @@ namespace KPIReporting.AvailabilityTest
                 var Job2Status = await response2.Content.ReadAsStringAsync();
                 response2.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for {_testJob2Url}: {Job2Status.status}");
-                 if !(Job2Status.status == "Running" || Job2Status.status == "Completed")
+                 if (!(Job2Status.status == "Running" || Job2Status.status == "Completed"))
                     throw new ArgumentException("Please start web job.");
 /*
                  // Make a request to the test app that we monitor for availability
