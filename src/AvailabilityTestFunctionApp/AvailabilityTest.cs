@@ -66,7 +66,6 @@ namespace KPIReporting.AvailabilityTest
                 // Make a request to the test app that we monitor for availability
                 using HttpResponseMessage response1 = await _httpClient.GetAsync(_testJob1Url);
                 var Job1Status = await response1.Content.ReadAsStringAsync();  
-                log.LogInformation($"Successful response! Response code for _tetJob1Url: {Job1Status.status} ");
                 if (Job1Status.Contains("\"status\":\"Running\"") || Job1Status.Contains("\"status\":\"Completed\""))
                 {
                 log.LogInformation($"Successful response! Response status for {_testJob1Url}: Running");
