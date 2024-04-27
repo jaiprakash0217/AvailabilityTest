@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
-//using System.Web.Script.Serialization;
+using System.Web.Script.Serialization;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.Azure.WebJobs;
@@ -16,7 +16,7 @@ namespace KPIReporting.AvailabilityTest
     /// and reports result to Application Insights
     /// The function will run every 15 minutes
     /// </summary>
-    public class JobStatus
+    public class WebJobStatus
     {
         public string status{ get; set; }
     }
@@ -64,8 +64,9 @@ namespace KPIReporting.AvailabilityTest
                 using HttpResponseMessage response = await _httpClient.GetAsync(_testAppUrl);
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 var JobStatus = await response.Content.ReadAsStringAsync();  
+                //var json1 = new JavaScriptSerializer().Serialize(JobStatus)
                 response.EnsureSuccessStatusCode();
-                log.LogInformation($"Successful response! Response code for Base URL: {response} : {JobStatus.status} ");
+                log.LogInformation($"Successful response! Response code for Base URL: {response} : {((WebJobStatus)JobStatus).status} ");
                
 
                 // Repeat this task for all web jobs
@@ -76,7 +77,7 @@ namespace KPIReporting.AvailabilityTest
                 var Job1Status = await response1.Content.ReadAsStringAsync();  
                 log.LogInformation($"Successful response! Response code for _testJob1Url: {Job1Status.status} ");
                 //var json1 = new JavaScriptSerializer().Serialize(Job1Status)
-                if (!(((JobStatus)Job1Status).status == "Running" || ((JobStatus)Job1Status).status == "Completed"))
+                if (!(((WebJobStatus)Job1Status).status == "Running" || ((WebJobStatus)Job1Status).status == "Completed"))
                     throw new ArgumentException("Please start web job.");
                 
                  // Make a request to the test app that we monitor for availability
@@ -86,7 +87,7 @@ namespace KPIReporting.AvailabilityTest
                 response2.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for {_testJob2Url}: {Job2Status.status}");
                 //var json2 = new JavaScriptSerializer().Serialize(Job2Status)
-                 if (!(((JobStatus)Job2Status).status == "Running" || ((JobStatus)Job2Status).status == "Completed"))
+                 if (!(((WebJobStatus)Job2Status).status == "Running" || ((WebJobStatus)Job2Status).status == "Completed"))
                     throw new ArgumentException("Please start web job.");
 /*
                  // Make a request to the test app that we monitor for availability
