@@ -1,6 +1,8 @@
 using System;
+using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
+//using System.Web.Script.Serialization;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.Azure.WebJobs;
@@ -14,6 +16,10 @@ namespace KPIReporting.AvailabilityTest
     /// and reports result to Application Insights
     /// The function will run every 15 minutes
     /// </summary>
+    public class JobStatus
+    {
+        public string status{ get; set; }
+    }
     public class AvailabilityTest
     {
         private readonly TelemetryClient _telemetryClient;
@@ -69,7 +75,8 @@ namespace KPIReporting.AvailabilityTest
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 var Job1Status = await response1.Content.ReadAsStringAsync();  
                 log.LogInformation($"Successful response! Response code for _testJob1Url: {Job1Status.status} ");
-                if (!(Job1Status.status == "Running" || Job1Status.status == "Completed"))
+                //var json1 = new JavaScriptSerializer().Serialize(Job1Status)
+                if (!(((JobStatus)Job1Status).status == "Running" || ((JobStatus)Job1Status).status == "Completed"))
                     throw new ArgumentException("Please start web job.");
                 
                  // Make a request to the test app that we monitor for availability
@@ -78,7 +85,8 @@ namespace KPIReporting.AvailabilityTest
                 var Job2Status = await response2.Content.ReadAsStringAsync();
                 response2.EnsureSuccessStatusCode();
                 log.LogInformation($"Successful response! Response code for {_testJob2Url}: {Job2Status.status}");
-                 if (!(Job2Status.status == "Running" || Job2Status.status == "Completed"))
+                //var json2 = new JavaScriptSerializer().Serialize(Job2Status)
+                 if (!(((JobStatus)Job2Status).status == "Running" || ((JobStatus)Job2Status).status == "Completed"))
                     throw new ArgumentException("Please start web job.");
 /*
                  // Make a request to the test app that we monitor for availability
