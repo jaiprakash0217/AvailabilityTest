@@ -59,6 +59,8 @@ namespace KPIReporting.AvailabilityTest
                 using HttpResponseMessage response = await _httpClient.GetAsync(_testAppUrl);
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response.EnsureSuccessStatusCode();
+                var ok = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+                log.LogInformation(ok);
                 log.LogInformation($"Successful response! Response code for Base URL: {response.StatusCode} ");
                
 
