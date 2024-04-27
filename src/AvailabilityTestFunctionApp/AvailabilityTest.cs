@@ -53,8 +53,9 @@ namespace KPIReporting.AvailabilityTest
                 _httpClient.DefaultRequestHeaders.Add($"Authorization", $"Basic JHVzYXd1MmdkcGNudHJsLWRldi13YXA6MERNNGFTdndXV005bUoyOEdNcUdyY0ZRdGFLUEI3YjEzNVpxNHZnNHBKRkdqVDYxbnRHZkRUMjVUWFNY");
                 using HttpResponseMessage response = await _httpClient.GetAsync("https://usawu2gdpcntrl-dev-wap.scm.usawu2gdpcntrl-dev-ase.appserviceenvironment.net/api/continuouswebjobs/MetallurgyReportWebJob");
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
+                var JobStatus = await response.Content.ReadAsStringAsync();  
                 response.EnsureSuccessStatusCode();
-                log.LogInformation($"Successful response! Response code for base URL: {response} ");
+                log.LogInformation($"Successful response! Response code for base URL: {response} : {JobStatus} ");
                
 
                 // Repeat this task for all web jobs
