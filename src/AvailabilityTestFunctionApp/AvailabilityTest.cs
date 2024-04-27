@@ -53,9 +53,9 @@ namespace KPIReporting.AvailabilityTest
             try
             {
                 // Make a request to the test app that we monitor for availability
-                //_httpClient.DefaultRequestHeaders.Add($"Authorization", $"Basic JHVzYXd1MmdkcGNudHJsLWRldi13YXA6MERNNGFTdndXV005bUoyOEdNcUdyY0ZRdGFLUEI3YjEzNVpxNHZnNHBKRkdqVDYxbnRHZkRUMjVUWFNY");
+                _httpClient.DefaultRequestHeaders.Add($"Authorization", $"Basic JHVzYXd1MmdkcGNudHJsLWRldi13YXA6MERNNGFTdndXV005bUoyOEdNcUdyY0ZRdGFLUEI3YjEzNVpxNHZnNHBKRkdqVDYxbnRHZkRUMjVUWFNY");
                 var byteArray = Encoding.ASCII.GetBytes("{_userName}:{_password}");
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+                //_httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
                 using HttpResponseMessage response = await _httpClient.GetAsync(_testAppUrl);
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
                 response.EnsureSuccessStatusCode();
