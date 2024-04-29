@@ -88,31 +88,63 @@ namespace KPIReporting.AvailabilityTest
                     log.LogInformation($"Successful response! Response status for {_testJob2Url}: Not Running");
                     throw new ArgumentException($"Please start web job: {_testJob2Url}");
                 }
-/*
+
                  // Make a request to the test app that we monitor for availability
                 using HttpResponseMessage response3 = await _httpClient.GetAsync(_testJob3Url);                
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
-                response3.EnsureSuccessStatusCode();
-                log.LogInformation($"Successful response! Response code for {_testJob3Url}: {response3.StatusCode} ");
+                var Job3Status = await response3.Content.ReadAsStringAsync();
+                if (Job3Status.Contains("\"status\":\"Running\"") || Job3Status.Contains("\"status\":\"Completed\""))
+                {
+                log.LogInformation($"Successful response! Response status for {_testJob3Url}: Running");
+                }
+                else
+                {
+                    log.LogInformation($"Successful response! Response status for {_testJob3Url}: Not Running");
+                    throw new ArgumentException($"Please start web job: {_testJob3Url}");
+                }
 
                  // Make a request to the test app that we monitor for availability
                 using HttpResponseMessage response4 = await _httpClient.GetAsync(_testJob4Url);                
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
-                response4.EnsureSuccessStatusCode();
-                log.LogInformation($"Successful response! Response code for {_testJob4Url}: {response4.StatusCode} ");
+                var Job4Status = await response4.Content.ReadAsStringAsync();
+                if (Job4Status.Contains("\"status\":\"Running\"") || Job4Status.Contains("\"status\":\"Completed\""))
+                {
+                log.LogInformation($"Successful response! Response status for {_testJob4Url}: Running");
+                }
+                else
+                {
+                    log.LogInformation($"Successful response! Response status for {_testJob4Url}: Not Running");
+                    throw new ArgumentException($"Please start web job: {_testJob4Url}");
+                }
 
                  // Make a request to the test app that we monitor for availability
                 using HttpResponseMessage response5 = await _httpClient.GetAsync(_testJob5Url);
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
-                response5.EnsureSuccessStatusCode();
-                log.LogInformation($"Successful response! Response code for {_testJob5Url}: {response5.StatusCode} ");
+                var Job5Status = await response5.Content.ReadAsStringAsync();
+                if (Job5Status.Contains("\"status\":\"Running\"") || Job5Status.Contains("\"status\":\"Completed\""))
+                {
+                log.LogInformation($"Successful response! Response status for {_testJob5Url}: Running");
+                }
+                else
+                {
+                    log.LogInformation($"Successful response! Response status for {_testJob5Url}: Not Running");
+                    throw new ArgumentException($"Please start web job: {_testJob5Url}");
+                }
 
                  // Make a request to the test app that we monitor for availability
                 using HttpResponseMessage response6 = await _httpClient.GetAsync(_testJob6Url);                
                 // Ensure we get a successful response (typically 200 OK). Otherwise, an exception will be thrown
-                response6.EnsureSuccessStatusCode();
-                log.LogInformation($"Successful response! Response code for {_testJob6Url}: {response6.StatusCode} ");
-*/
+                var Job6Status = await response6.Content.ReadAsStringAsync();
+                if (Job6Status.Contains("\"status\":\"Running\"") || Job6Status.Contains("\"status\":\"Completed\""))
+                {
+                log.LogInformation($"Successful response! Response status for {_testJob6Url}: Running");
+                }
+                else
+                {
+                    log.LogInformation($"Successful response! Response status for {_testJob6Url}: Not Running");
+                    throw new ArgumentException($"Please start web job: {_testJob6Url}");
+                }
+
                 // Signal to App Insights that everything is ok
                 this.TrackAvailability(true);
             }
